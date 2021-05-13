@@ -49,11 +49,66 @@ with_terminal() do
 	end
 end
 
-# ╔═╡ 38f242e0-b401-11eb-2375-cb92746539c7
+# ╔═╡ 55771290-b412-11eb-0072-eb6b4d29d6f3
+@bind position NumberField(-1000000000:1000000000, default = 0)
 
+# ╔═╡ 975a9880-b412-11eb-3555-23ba763b35eb
+@bind maxPlayer CheckBox()
+
+# ╔═╡ 8fb428b0-b40f-11eb-3fa4-2755c9c0ca79
+function minimax(position, depth, maxPlayer)
+	if depth == 0 in position
+		return position
+	end
+	if maxPlayer
+		maxEvaluation = -1000000000
+		for child in position
+			eval = minimax(child, depth - 1, false)
+			maxEvaluation = max(maxEval, eval)
+		end
+		return maxEvaluation
+	else
+		minEvaluation = 1000000000
+		for child in position
+			eval = minimax(child, depth - 1, false)
+			minEvaluation = min(maxEval, eval)
+		end
+		return minEvaluation
+	end
+end			
+
+# ╔═╡ 38f242e0-b401-11eb-2375-cb92746539c7
+function abPruning(position, depth, maxPlayer, alpha, beta)
+	if depth == 0 in position
+		return position
+	end
+	if maxPlayer
+		maxEvaluation = -1000000000
+		for child in position
+			eval = abPruning(child, depth - 1, false, alpha, beta)
+			maxEvaluation = max(maxEval, eval)
+			alpha = max(alpha, eval)
+			if beta <= alpha
+				break
+			end
+		end
+		return maxEvaluation
+	else
+		minEvaluation = 1000000000
+		for child in position
+			eval = abPruning(child, depth - 1, false, alpha, beta)
+			minEvaluation = min(maxEval, eval)
+			beta = min(beta, eval)
+			if beta <= alpha
+				break
+			end
+		end
+		return minEvaluation
+	end	
+end		
 
 # ╔═╡ 38d9fff0-b401-11eb-22e6-9b337b789b31
-
+abPruning(position, -10, 10, maxPlayer)
 
 # ╔═╡ 38c0ab92-b401-11eb-146e-25ce6bc7d366
 
@@ -70,6 +125,9 @@ end
 # ╠═5587bd30-aea8-11eb-3fc8-591804491a04
 # ╠═686e3452-b3fe-11eb-1c43-53d09df29c4b
 # ╠═201440d0-b400-11eb-0dab-efaa60e28962
+# ╠═55771290-b412-11eb-0072-eb6b4d29d6f3
+# ╠═975a9880-b412-11eb-3555-23ba763b35eb
+# ╠═8fb428b0-b40f-11eb-3fa4-2755c9c0ca79
 # ╠═38f242e0-b401-11eb-2375-cb92746539c7
 # ╠═38d9fff0-b401-11eb-22e6-9b337b789b31
 # ╠═38c0ab92-b401-11eb-146e-25ce6bc7d366
