@@ -77,6 +77,9 @@ end
 # ╔═╡ 4ca781f0-aeb2-11eb-1684-23cb5cf75d84
 unaryConstr = domain(x3, 1)
 
+# ╔═╡ 11579f00-b415-11eb-2545-5dfaacb4ecdd
+
+
 # ╔═╡ a79d7ce0-aeb2-11eb-39ae-55661fc79e5e
 md"""
 ## PseudoSolutions
@@ -128,4 +131,5 @@ md"""
 # ╠═400b7830-aeb1-11eb-3de5-7f59946be43d
 # ╠═3fcd5dc0-aeb1-11eb-09e2-4f5507130dc9
 # ╠═4ca781f0-aeb2-11eb-1684-23cb5cf75d84
+# ╠═11579f00-b415-11eb-2545-5dfaacb4ecdd
 # ╠═a79d7ce0-aeb2-11eb-39ae-55661fc79e5e
